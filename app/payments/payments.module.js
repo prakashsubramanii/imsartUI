@@ -2,7 +2,7 @@
 
 var paymentApp = angular.module('paymentApp',[]);
 
-paymentApp.controller('paymentController', ['$http','$scope', '$rootScope', 'config', 'paymentAppService', function($http, $scope, $rootScope, config, paymentAppService){
+paymentApp.controller('paymentController', ['$http','$scope','$window', '$rootScope', 'config', 'paymentAppService', function($http, $scope, $window, $rootScope, config, paymentAppService){
 
     $scope.payment = {}
 
@@ -18,9 +18,14 @@ paymentApp.controller('paymentController', ['$http','$scope', '$rootScope', 'con
                 function (success) {
                     $scope.payment.customers = success.data;
                     $scope.payment.customer = $scope.payment.customers[0];
+
+                    console.log($scope.payment.customer);
+
+                    paymentAppService.setLoggedInUser($scope.payment.customer.customerId);
+
                 },
                 function (error) {
-                    alert('Error getting the customers list');
+                    console.log('Error getting the customers list');
                 }); 
 
 
@@ -30,7 +35,7 @@ paymentApp.controller('paymentController', ['$http','$scope', '$rootScope', 'con
             $scope.payment.spendCategories = success.data;
         },
         function (error) {
-            alert('Error getting the spend categories');
+            console.log('Error getting the spend categories');
         }); 
 
     $scope.transact = function(paymentObj){
@@ -50,7 +55,7 @@ paymentApp.controller('paymentController', ['$http','$scope', '$rootScope', 'con
                 window.location.replace('#!/transactions');
             },
             function (error) {
-                alert('Error in receiving/making the payments');
+                console.log('Error in receiving/making the payments');
             }); 
     }
 

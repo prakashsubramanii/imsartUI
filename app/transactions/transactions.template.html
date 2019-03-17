@@ -15,9 +15,15 @@
             <div class="col-xs-6">
                     <label for="status" class="col-sm-3 control-label">Time Range</label>
                     <div class="col-sm-9">
-                            <select name="type" ng-model="option" ng-dropdown required ng-change="getTimeRangeData()" ng-options="option.type for option in options">
+                            <select name="type" ng-model="option" ng-dropdown required ng-change="getTimeRangeData(option)" ng-options="option.type for option in options">
                                 </select>
+                                <div ng-show="option.type==='periodic'">
+                                        <br>
+                                        <p>Start Date <input type="date" class="form-control" id="date" name="date" ng-model="startDate" required></p>
+                                        <p>End Date <input type="date" class="form-control" id="date" name="date" ng-model="endDate" required></p>
+                                </div>
                     </div>
+
                 </div>
                 <h3>
                     <font color="007bff">User Transactions</font>
@@ -28,19 +34,24 @@
                         <!-- <ul> -->
                             <thead>
                                 <tr ng-show="transactions">
+                                    <th>Customer</th>
                                     <th>Transction Description</th>
                                     <th>Spend Category</th>
                                     <th>Amount</th>
                                     <th>Date</th>
                                     <th>Payment Type</th>
+                                    <th>Balance</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr dir-paginate="transaction in transactions | itemsPerPage: 6">
-                                    <td>{{transaction.age}}</td>
-                                    <td>{{transaction.id}}</td>
-                                    <td>{{transaction.imageUrl}}</td>
-                                    <td>{{transaction.name}}</td>
+                                    <td>{{transaction.customerId}}</td>
+                                    <td>{{transaction.description}}</td>
+                                    <td>{{transaction.spendCategory}}</td>
+                                    <td>{{transaction.amount}}</td>
+                                    <td>{{transaction.date | date }}</td>
+                                    <td>{{transaction.paymentType}}</td>
+                                    <td>{{transaction.balance}}</td>
                                 </tr>
                             </tbody>
                         <!-- </ul> -->

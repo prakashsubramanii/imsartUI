@@ -2,16 +2,14 @@
 
 var transactions = angular.module('transactions', ['ui.bootstrap']);
 
-transactions.controller('transactionsController', ['$http','$scope', '$rootScope', '$location', '$uibModal', 'config','transactionsService','paymentAppService',
-    function ($http, $scope, $rootScope, $location, $uibModal, config, transactionsService,paymentAppService) {
-        
-        //config.url+'einsure/policies/'
-        $http.get('phones/transactions.json').then(function (response) {
-                $scope.transactions = response.data;
-        });
-        
+transactions.controller('transactionsController', ['$http','$scope', '$window', '$rootScope', '$location', '$uibModal', 'config','transactionsService','paymentAppService',
+    function ($http, $scope, $window, $rootScope, $location, $uibModal, config, transactionsService,paymentAppService) {
+
         $scope.categories = paymentAppService.getSpendCategoryOptions();
         $scope.category;
+
+        $scope.startDate;
+        $scope.endDate;
 
         if ( $scope.categories === undefined ){
                 paymentAppService.getSpendCategories()
@@ -21,27 +19,38 @@ transactions.controller('transactionsController', ['$http','$scope', '$rootScope
                         paymentAppService.setSpendCategoryOptions($scope.categories);
                     },
                     function (error) {
-                        alert('Error getting the spend categories');
+                        console.log('Error getting the spend categories');
                     }); 
         }
 
         $scope.options = [
-            { type: 'Current' },
-            { type: 'Monthly' },
-            { type: 'Periodically' }];
+            { type: 'current' },
+            { type: 'periodic' }];
 
             $scope.option = $scope.options[0];
 
 
-            $scope.getTimeRangeData = function(){
-                transactionsService.getTimeRangeData()
+            $scope.getTimeRangeData = function(option){
+                console.log(option.type);
+                transactionsService.getTimeRangeData(option.type)
                 .then(
                     function (success) {
                         $scope.transactions = success.data;
                     },
                     function (error) {
-                        alert('Error getting the spend categories');
+                        console.log('Error getting the spend categories');
                     }); 
             }
+
+
+            transactionsService.getTimeRangeData($scope.option.type,  $scope.startDate,  $scope.endDate)
+            .then(
+                function (success) {
+                    $scope.transactions = success.data;
+                    console.log(JSON.stringify($scope.transactions));
+                },
+                function (error) {
+                    console.log('Error getting the spend categories');
+                }); 
 
     }]);

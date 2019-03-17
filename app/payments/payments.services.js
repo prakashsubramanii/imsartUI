@@ -5,6 +5,15 @@ angular.module('paymentApp').factory('paymentAppService', ['$http', '$window', '
 
     var service = {};
     var spendCategories;
+
+
+    service.getLoggedInUser = function () {
+      return $window.localStorage['currentUsr'];
+    }
+
+    service.setLoggedInUser = function (username) {
+      $window.localStorage['currentUsr'] = username;
+    }
     
     service.getCustomers = function () {
       return $http({
