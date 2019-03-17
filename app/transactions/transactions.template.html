@@ -7,7 +7,7 @@
                 <label for="status" class="col-sm-3 control-label">Spend Category</label>
                 <div class="col-sm-9">
                   <select class="form-control" name="spends" id="spends"
-                    ng-options="category for category in categories" ng-model="category">
+                    ng-options="category for category in categories" ng-model="category" ng-change="resetCategories(category)">
                     <option value="">--Select Category--</option>
                   </select><br /><br />
                 </div>
@@ -45,7 +45,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr dir-paginate="transaction in transactions | itemsPerPage: 6">
+                                <tr dir-paginate="transaction in transactions | filter: category | itemsPerPage: 6">
                                     <td>{{transaction.customerId}}</td>
                                     <td>{{transaction.description}}</td>
                                     <td>{{transaction.spendCategory}}</td>

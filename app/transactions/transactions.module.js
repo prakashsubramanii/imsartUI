@@ -11,6 +11,21 @@ transactions.controller('transactionsController', ['$http','$scope', '$window', 
         $scope.startDate;
         $scope.endDate;
 
+        $scope.resetCategories = function(category){
+            
+            if ( $scope.category === '' || $scope.category === null || $scope.category === undefined ){
+                $scope.categories = paymentAppService.getSpendCategories()
+                .then(
+                    function (success) {
+                        $scope.categories = success.data;
+                        paymentAppService.setSpendCategoryOptions($scope.categories);
+                    },
+                    function (error) {
+                        console.log('Error getting the spend categories');
+                    });
+            }
+        }
+
         if ( $scope.categories === undefined ){
                 paymentAppService.getSpendCategories()
                 .then(
