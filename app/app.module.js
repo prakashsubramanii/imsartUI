@@ -10,6 +10,6 @@ iSmartApp.controller('smartController', function insureController($scope){
 
 
 iSmartApp.constant('config', {
-    url:'http://10.117.189.206:9080/'
+    url:'http://13.233.90.170:9080/'
 
 });
