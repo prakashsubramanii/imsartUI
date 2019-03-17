@@ -10,7 +10,7 @@
         <div class="form-group">
           <div class="col-xs-6">
             <select class="form-control" name="customer" ng-model="payment.customer" ng-dropdown required
-              ng-options="customer.name for customer in customers">
+              ng-options="customer.customerId for customer in payment.customers">
             </select>
           </div>
         </div>
@@ -35,7 +35,7 @@
                 <label for="status" class="col-sm-3 control-label">Spend Category</label>
                 <div class="col-sm-9">
                   <select class="form-control" name="spends" id="spends"
-                    ng-options="category for category in spendCategory" ng-change="getdetails()"
+                    ng-options="category for category in payment.spendCategories" ng-change="getdetails()"
                     ng-model="payment.category" required>
                     <option value="">--Select Category--</option>
                   </select><br /><br />
@@ -46,7 +46,7 @@
               <div class="form-group">
                 <label for="amount" class="col-sm-3 control-label">Amount</label>
                 <div class="col-sm-9">
-                  <input type="number" class="form-control" id="amount" name="amount" ng-model="payment.amount"
+                  <input type="number" class="form-control" id="amount" name="amount" min="1" ng-model="payment.amount"
                     required>
                   <span ng-show="form.amount.$dirty && form.amount.$error.required" class="help-block">Amount is
                     required</span>

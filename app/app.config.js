@@ -9,8 +9,8 @@ angular.
 
       $routeProvider.
         when('/transactions', {
-          controller: 'smartController',
-          template: '<menu-list></menu-list><h1>Transactions</h1>'
+          controller: 'transactionsController',
+          templateUrl: 'transactions/transactions.template.html'
         }).
         when('/payments', {
           controller: 'smartController',
