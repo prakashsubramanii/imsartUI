@@ -31,8 +31,8 @@ transactions.controller('transactionsController', ['$http','$scope', '$window', 
 
 
             $scope.getTimeRangeData = function(option){
-                console.log(option.type);
-                transactionsService.getTimeRangeData(option.type)
+                console.log(option.type +  $scope.startDate +   $scope.endDate );
+                transactionsService.getTimeRangeData(option.type, $scope.startDate,  $scope.endDate)
                 .then(
                     function (success) {
                         $scope.transactions = success.data;

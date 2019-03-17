@@ -20,9 +20,6 @@ angular.module('transactions').factory('transactionsService', ['$http', '$window
 
       if ( timeRange === 'periodic'){
 
-          if ( sdate === null || sdate === undefined || edate === null || edate === undefined )
-                return;
-
         redirectUrls='ISmart/api/transactions/periodic/'+$window.localStorage['currentUsr']
 
         var params = {
