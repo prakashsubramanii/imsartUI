@@ -1,0 +1,88 @@
+<menu-list></menu-list>
+<!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
+<div ng-app="paymentApp" ng-controller="paymentController">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h4>Customer</h4>
+        <div class="form-group">
+          <div class="col-xs-6">
+            <select class="form-control" name="customer" ng-model="payment.customer" ng-dropdown required
+              ng-options="customer.name for customer in customers">
+            </select>
+          </div>
+        </div>
+        <br></br>
+      </div>
+      <!-- panel preview -->
+      <div class="col-sm-5">
+        <h4>Make/Receive payments</h4>
+        <div class="panel panel-default">
+          <form name="form" ng-submit="transact(payment)" role="form">
+            <div class="panel-body form-horizontal payment-form">
+              <div class="form-group">
+                <label for="description" class="col-sm-3 control-label">Description</label>
+                <div class="col-sm-9">
+                  <input type="text" name="description" id="description" class="form-control"
+                    ng-model="payment.description" required>
+                  <span ng-show="form.description.$dirty && form.description.$error.required"
+                    class="help-block">Description is required</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="status" class="col-sm-3 control-label">Spend Category</label>
+                <div class="col-sm-9">
+                  <select class="form-control" name="spends" id="spends"
+                    ng-options="category for category in spendCategory" ng-change="getdetails()"
+                    ng-model="payment.category" required>
+                    <option value="">--Select Category--</option>
+                  </select><br /><br />
+                  <span ng-show="form.spends.$dirty && form.spends.$error.required" class="help-block">Category is
+                    required</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="amount" class="col-sm-3 control-label">Amount</label>
+                <div class="col-sm-9">
+                  <input type="number" class="form-control" id="amount" name="amount" ng-model="payment.amount"
+                    required>
+                  <span ng-show="form.amount.$dirty && form.amount.$error.required" class="help-block">Amount is
+                    required</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="status" class="col-sm-3 control-label">Payment Type</label>
+                <div class="col-sm-9">
+                  <select class="form-control" id="paymentType" name="paymentType"
+                    ng-options="type.name for type in paymentType" ng-model="payment.paymentType" required>
+                    <option value="">--Select Payment Type--</option>
+                  </select><br /><br />
+                  <span ng-show="form.paymentType.$dirty && form.paymentType.$error.required" class="help-block">Payment
+                    type is required</span>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="date" class="col-sm-3 control-label">Date</label>
+                <div class="col-sm-9">
+                  <input type="date" class="form-control" id="date" name="date" ng-model="payment.date" required>
+                  <span ng-show="form.date.$dirty && form.date.$error.required" class="help-block">Date is
+                    required</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-12 text-right">
+                  <div class="form-actions">
+                    <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">Pay</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
